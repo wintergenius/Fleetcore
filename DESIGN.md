@@ -156,11 +156,12 @@ self-hosted export already has the real key baked in).
 
 ## 6. Health & selection
 
-> **Provenance.** This subsystem is a clean-room distillation of the operator's own fleet
-> redistribution / health-oracle work (internal OI-13 / OI-20 / OI-23). The **patterns** below
-> are re-implemented from scratch and are fully specified here; **no external code, doc, or
-> system access is required.** Those systems' hard-won anti-churn lessons are what keep a naive
-> health check from turning failover into flap.
+> **Why this is more than a health check.** A naive "ping, switch on failure" loop turns
+> transient loss into constant flapping and clients into a churning herd. The patterns below —
+> smoothing, hysteresis, flap-scoring, and post-switch stickiness — exist specifically to make
+> failover *stable*: switch when it genuinely helps, stay put otherwise. They are standard
+> fleet-health engineering and are fully specified here; **no external code or system is
+> required.**
 
 Patterns to carry over:
 
@@ -172,8 +173,8 @@ Patterns to carry over:
    hard-dead ones, so selection doesn't keep bouncing onto a soft-flapping node.
 4. **Post-switch stickiness / cooldown.** After advertising a new best, hold it for a cooldown
    before re-evaluating, to prevent two effects fighting and reconverging every cycle.
-5. **Justified + curative + durable selection.** Change the advertised best **only** when the
-   current one is genuinely bad **and** the candidate is meaningfully and *durably* better —
+5. **Switch only on a real, lasting improvement.** Change the advertised best **only** when the
+   current one is genuinely bad **and** the alternative is meaningfully and *durably* better —
    not on noise. "Zero switches when everything's fine" is success, not breakage.
 6. **Signal-source discipline.** Selection reads *smoothed health windows*, not the last
    instantaneous sample.
