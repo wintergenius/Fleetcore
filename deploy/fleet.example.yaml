@@ -1,0 +1,37 @@
+# fleetcore example configuration (DESIGN.md §7).
+#
+# Paths are container paths matching docker-compose.yml. For a local `go run`
+# demo, point config_file/key_file at deploy/... instead.
+
+listen: ":8443"
+selection: priority          # priority | weighted | roundrobin
+
+health:
+  interval: 15s
+  timeout: 3s
+  rise: 2                     # consecutive OK probes to mark a member up
+  fall: 3                     # consecutive failed probes to mark it down
+  flap_window: 10m           # decay window for flap-scoring
+  switch_cooldown: 5m        # post-switch stickiness (anti-flap, rule 4)
+
+signing:
+  key_file: /keys/ed25519.key # private key, mounted — never baked into the image
+  kid: nl-fleet-2026
+
+members:
+  # `check.type: none` = no probe, always up. It lets the demo serve a config
+  # out of the box without reachable servers. For real failover, switch to a
+  # `tcp`/`http`/`udp` check against each server (examples commented below).
+  - label: nl-1
+    priority: 10               # lower number = preferred
+    weight: 1
+    check: { type: none }
+    # check: { type: tcp, target: "203.0.113.10:443" }
+    config_file: /fleet/nl-1.amnezia.json
+
+  - label: de-1
+    priority: 20
+    weight: 1
+    check: { type: none }
+    # check: { type: udp, target: "198.51.100.20:55424" }
+    config_file: /fleet/de-1.amnezia.json

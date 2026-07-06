@@ -1,0 +1,9 @@
+# Private signing keys never belong in the repo (DESIGN.md §4).
+/keys/
+*.key
+deploy/keys/
+
+# Build output
+/fleetcore
+/fleetcore.exe
+/out/

@@ -1,0 +1,24 @@
+{
+  "hostName": "203.0.113.10",
+  "dns1": "1.1.1.1",
+  "dns2": "1.0.0.1",
+  "config_version": 0,
+  "defaultContainer": "amnezia-awg",
+  "containers": [
+    {
+      "container": "amnezia-awg",
+      "awg": {
+        "port": "55424",
+        "transport_proto": "udp",
+        "subnet_address": "10.8.1.0",
+        "mtu": "1376",
+        "Jc": "5", "Jmin": "10", "Jmax": "50",
+        "S1": "119", "S2": "38", "S3": "51", "S4": "12",
+        "H1": "1148571719", "H2": "2137945458", "H3": "1250648369", "H4": "3925184142",
+        "I1": "<r 2><b 0x858000010001000000000669636c6f756403636f6d0000010001c00c000100010000105a00044d583737>",
+        "I2": "", "I3": "", "I4": "", "I5": "",
+        "last_config": "{\"H1\":\"1148571719\",\"H2\":\"2137945458\",\"H3\":\"1250648369\",\"H4\":\"3925184142\",\"Jc\":\"5\",\"Jmax\":\"50\",\"Jmin\":\"10\",\"S1\":\"119\",\"S2\":\"38\",\"S3\":\"51\",\"S4\":\"12\",\"I1\":\"<r 2><b 0x858000010001000000000669636c6f756403636f6d0000010001c00c000100010000105a00044d583737>\",\"I2\":\"\",\"I3\":\"\",\"I4\":\"\",\"I5\":\"\",\"allowed_ips\":[\"0.0.0.0/0\",\"::/0\"],\"clientId\":\"CLIENT_PUB_KEY_BASE64=\",\"client_ip\":\"10.8.1.2\",\"client_priv_key\":\"CLIENT_PRIV_KEY_BASE64=\",\"client_pub_key\":\"CLIENT_PUB_KEY_BASE64=\",\"config\":\"[Interface]\\nAddress = 10.8.1.2/32\\nDNS = 1.1.1.1, 1.0.0.1\\nPrivateKey = CLIENT_PRIV_KEY_BASE64=\\nJc = 5\\nJmin = 10\\nJmax = 50\\nS1 = 119\\nS2 = 38\\nS3 = 51\\nS4 = 12\\nH1 = 1148571719\\nH2 = 2137945458\\nH3 = 1250648369\\nH4 = 3925184142\\nI1 = <r 2><b 0x858000010001000000000669636c6f756403636f6d0000010001c00c000100010000105a00044d583737>\\nI2 = \\nI3 = \\nI4 = \\nI5 = \\n\\n[Peer]\\nPublicKey = SERVER_PUB_KEY_BASE64=\\nPresharedKey = PRESHARED_KEY_BASE64=\\nAllowedIPs = 0.0.0.0/0, ::/0\\nEndpoint = 203.0.113.10:55424\\nPersistentKeepalive = 25\\n\",\"hostName\":\"203.0.113.10\",\"mtu\":\"1376\",\"persistent_keep_alive\":\"25\",\"port\":55424,\"psk_key\":\"PRESHARED_KEY_BASE64=\",\"server_pub_key\":\"SERVER_PUB_KEY_BASE64=\"}"
+      }
+    }
+  ]
+}

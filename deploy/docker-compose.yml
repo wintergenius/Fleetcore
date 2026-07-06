@@ -1,0 +1,28 @@
+# Runnable demo of the whole loop. From the repo root:
+#
+#   # 1. generate a signing key next to the compose file (host side)
+#   docker compose -f deploy/docker-compose.yml run --rm --no-deps \
+#     --entrypoint /usr/local/bin/fleetcore fleetcore keygen -o /keys/ed25519.key
+#
+#   # 2. bring it up
+#   docker compose -f deploy/docker-compose.yml up --build
+#
+#   # 3. poll it
+#   curl -s localhost:8443/v1/config  | jq .
+#   curl -s localhost:8443/v1/pubkey
+#   curl -s localhost:8443/healthz    | jq .
+
+services:
+  fleetcore:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    image: fleetcore:latest
+    command: ["serve", "-c", "/etc/fleetcore/fleet.yaml"]
+    ports:
+      - "8443:8443"
+    volumes:
+      - ./fleet.example.yaml:/etc/fleetcore/fleet.yaml:ro
+      - ./fleet:/fleet:ro
+      - ./keys:/keys:ro
+    restart: unless-stopped
