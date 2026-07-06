@@ -296,7 +296,7 @@ docker run --rm -p 8443:8443 \
   uncompressed `vpn://`, Dockerfile, client-stub acceptance test (Appendix E). Enough to attach
   to the issue and demo end-to-end.
 - **M2:** multi-member fleet + health checks + smoothed `priority` selection (§6 rules 1–4).
-- **M3:** `issue` tool, weighted/round-robin, justified+curative gating (rule 5), `ts`-bound
+- **M3:** `issue` tool, weighted/round-robin, durable-improvement switch gating (rule 5), `ts`-bound
   signature for replay protection (Appendix D), key rotation via `kid`.
 - **M4 (optional):** qCompress-compatible payloads, Prometheus `/metrics`, config caching.
 
