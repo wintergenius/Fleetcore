@@ -1,0 +1,2 @@
+# Normalize all text to LF in the repo (keeps Go source gofmt-clean on any OS).
+* text=auto eol=lf

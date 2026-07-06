@@ -4,7 +4,9 @@
 
 [English](#english) · [Русский](#русский)
 
-> 🚧 **Status:** design complete ([DESIGN.md](DESIGN.md)); M1 implementation in progress. Clean-room, MIT.
+> ✅ **Status:** M1 implemented — Ed25519-signed config endpoint, health-checked
+> multi-server selection (§6), Docker image, and an end-to-end acceptance test
+> (build + `go test -race` green). Clean-room, MIT. Full spec in [DESIGN.md](DESIGN.md).
 
 ---
 
@@ -41,11 +43,13 @@ plain HTTP. Fleetcore never proxies VPN traffic; it only says *which* of your se
 The full, self-contained spec — wire protocol, the exact client decode contract, wire-key
 reference, a complete example payload, and the crypto spec — is in **[DESIGN.md](DESIGN.md)**.
 
-### Planned usage
+### Usage
 
 ```sh
 fleetcore keygen -o keys/ed25519.key      # generate signing key; prints the pinned pubkey
 fleetcore serve  -c fleet.yaml            # run the control-plane
+fleetcore issue  --member nl-1 \          # emit a client SelfHosted config with the
+  --endpoint https://cfg.example.net/v1/config   # proposed update_* fields (DESIGN §8)
 ```
 
 ```sh
@@ -105,9 +109,9 @@ Fleetcore не проксирует VPN-трафик; он лишь говори
 Полная самодостаточная спека — wire-протокол, точный контракт декода клиента, таблица
 wire-ключей, полный пример payload и крипто-спека — в **[DESIGN.md](DESIGN.md)**.
 
-### Планируемое использование
+### Использование
 
-Команды и Docker-запуск — см. [Planned usage](#planned-usage) выше (интерфейс языконезависим).
+Команды и Docker-запуск — см. [Usage](#usage) выше (интерфейс языконезависим).
 
 ### Non-goals и безопасность
 
